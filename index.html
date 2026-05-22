@@ -4,115 +4,76 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>ERP · Gestión de Clientes</title>
-<link rel="stylesheet" href="https://jsdelivr.net"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css"/>
 <style>
-@import url('https://googleapis.com');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:'Inter',sans-serif;
-  min-height:100vh;
-  background:linear-gradient(135deg,#0d9488 0%,#14b8a6 50%,#5eead4 100%);
-  padding:24px;
-}
-.login-overlay{
-  position:fixed;inset:0;z-index:200;
-  background:linear-gradient(135deg,#0d9488,#0f766e);
-  display:flex;align-items:center;justify-content:center;
-}
-.login-box{
-  background:#fff;border-radius:24px;
-  width:min(380px,92vw);padding:36px 32px;
-  box-shadow:0 24px 60px rgba(0,0,0,0.18);
-  display:flex;flex-direction:column;gap:18px;
-}
+body{font-family:'Inter',sans-serif;min-height:100vh;background:linear-gradient(135deg,#0d9488 0%,#14b8a6 50%,#5eead4 100%);padding:24px;}
+.login-overlay{position:fixed;inset:0;z-index:200;background:linear-gradient(135deg,#0d9488,#0f766e);display:flex;align-items:center;justify-content:center;}
+.login-box{background:#fff;border-radius:24px;width:min(380px,92vw);padding:36px 32px;box-shadow:0 24px 60px rgba(0,0,0,0.18);display:flex;flex-direction:column;gap:18px;}
 .login-logo{text-align:center;font-size:32px;color:#0d9488;margin-bottom:4px;}
 .login-title{text-align:center;font-size:18px;font-weight:600;color:#1e293b;}
 .login-sub{text-align:center;font-size:12px;color:#94a3b8;margin-top:-10px;}
+.login-tabs{display:flex;border-bottom:1px solid #e2e8f0;margin:0 -32px;padding:0 32px;}
+.login-tab{flex:1;padding:10px;font-size:12px;font-weight:600;text-align:center;cursor:pointer;color:#94a3b8;border-bottom:2px solid transparent;transition:all 0.15s;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;}
+.login-tab.active{color:#0d9488;border-bottom-color:#0d9488;}
+.tab-panel{display:none;flex-direction:column;gap:14px;}
+.tab-panel.active{display:flex;}
 .login-field{display:flex;flex-direction:column;gap:4px;}
 .login-field label{font-size:11px;font-weight:500;color:#64748b;}
-.login-field input{
-  font-size:13px;font-family:inherit;
-  border:1px solid #e2e8f0;border-radius:10px;
-  padding:10px 13px;background:#f8fafc;color:#1e293b;
-  outline:none;transition:border 0.15s,box-shadow 0.15s;
-}
+.login-field input{font-size:13px;font-family:inherit;border:1px solid #e2e8f0;border-radius:10px;padding:10px 13px;background:#f8fafc;color:#1e293b;outline:none;transition:border 0.15s,box-shadow 0.15s;width:100%;}
 .login-field input:focus{border-color:#14b8a6;box-shadow:0 0 0 3px rgba(20,184,166,0.15);}
-.btn-login{
-  background:linear-gradient(135deg,#0d9488,#14b8a6);color:#fff;
-  border:none;border-radius:12px;padding:12px;font-size:14px;font-weight:600;
-  cursor:pointer;font-family:inherit;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:opacity 0.15s,transform 0.12s;margin-top:4px;
-}
+.btn-login{background:linear-gradient(135deg,#0d9488,#14b8a6);color:#fff;border:none;border-radius:12px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity 0.15s,transform 0.12s;margin-top:4px;}
 .btn-login:hover{opacity:0.9;}
-.btn-login:active{transform:scale(0.98);}
+.btn-registro{background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;border:none;border-radius:12px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity 0.15s;}
+.btn-registro:hover{opacity:0.9;}
 .login-err{font-size:12px;color:#dc2626;text-align:center;min-height:16px;font-weight:500;}
+.login-ok{font-size:12px;color:#059669;text-align:center;font-weight:500;}
 .erp-header{text-align:center;margin-bottom:22px;}
-.erp-header h1{
-  font-size:20px;font-weight:600;
-  background:linear-gradient(90deg,#fff,#ccfbf1);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  letter-spacing:-0.3px;
-}
+.erp-header h1{font-size:20px;font-weight:600;background:linear-gradient(90deg,#fff,#ccfbf1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.3px;}
 .erp-header p{font-size:12px;color:rgba(255,255,255,0.7);margin-top:4px;}
 .header-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap;}
-.user-pill{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);
-  color:#fff;font-size:12px;font-weight:500;padding:7px 14px;border-radius:50px;
-  backdrop-filter:blur(8px);
-}
-.btn-logout{
-  background:rgba(255,255,255,0.2);border:none;color:#fff;
-  font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;
-  cursor:pointer;font-family:inherit;transition:background 0.15s;
-}
+.btn-carrito-top{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);color:#fff;font-size:13px;font-weight:600;padding:9px 20px;border-radius:50px;cursor:pointer;backdrop-filter:blur(8px);transition:background 0.2s;font-family:inherit;}
+.btn-carrito-top:hover{background:rgba(255,255,255,0.25);}
+.btn-carrito-top i{font-size:18px;}
+.user-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);color:#fff;font-size:12px;font-weight:500;padding:7px 14px;border-radius:50px;backdrop-filter:blur(8px);}
+.btn-logout{background:rgba(255,255,255,0.2);border:none;color:#fff;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;cursor:pointer;font-family:inherit;transition:background 0.15s;}
 .btn-logout:hover{background:rgba(255,255,255,0.35);}
 .erp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1100px;margin:0 auto;}
-@media(max-width:768px){ .erp-grid{grid-template-columns:1fr;} }
-.panel{
-  background:rgba(255,255,255,0.82);border:1px solid rgba(255,255,255,0.9);
-  border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:11px;
-  box-shadow:0 2px 24px rgba(0,0,0,0.08),0 1px 4px rgba(0,0,0,0.04);
-}
+.panel{background:rgba(255,255,255,0.82);border:1px solid rgba(255,255,255,0.9);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:11px;box-shadow:0 2px 24px rgba(0,0,0,0.08),0 1px 4px rgba(0,0,0,0.04);}
 .panel-p1{background:linear-gradient(145deg,rgba(238,242,255,0.97),rgba(255,255,255,0.93));}
 .panel-p2{background:linear-gradient(145deg,rgba(240,253,250,0.97),rgba(255,255,255,0.93));}
 .panel-p3{background:linear-gradient(145deg,rgba(250,245,255,0.97),rgba(255,255,255,0.93));}
 .panel-p4{background:linear-gradient(145deg,rgba(255,251,235,0.97),rgba(255,255,255,0.93));}
-.panel-title{
-  font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;
-  padding-bottom:12px;border-bottom:1px solid rgba(0,0,0,0.06);
-}
+.panel-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;padding-bottom:12px;border-bottom:1px solid rgba(0,0,0,0.06);}
 .panel-title i{font-size:16px;}
 .t1 .panel-title{color:#4f46e5;} .t1 .panel-title i{color:#818cf8;}
 .t2 .panel-title{color:#0d9488;} .t2 .panel-title i{color:#2dd4bf;}
 .t3 .panel-title{color:#7c3aed;} .t3 .panel-title i{color:#a78bfa;}
 .t4 .panel-title{color:#b45309;} .t4 .panel-title i{color:#fbbf24;}
 label{font-size:11px;font-weight:500;color:#64748b;margin-bottom:2px;display:block;letter-spacing:0.2px;}
-input,select,textarea{
-  width:100%;font-size:13px;font-family:inherit;
-  border:1px solid #e2e8f0;border-radius:10px;
-  padding:8px 11px;background:#fff;color:#1e293b;
-  outline:none;transition:border 0.15s,box-shadow 0.15s;
-}
+input,select,textarea{width:100%;font-size:13px;font-family:inherit;border:1px solid #e2e8f0;border-radius:10px;padding:8px 11px;background:#fff;color:#1e293b;outline:none;transition:border 0.15s,box-shadow 0.15s;}
 input:focus,select:focus,textarea:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(129,140,248,0.15);}
-.btn{
-  width:100%;padding:9px 12px;font-size:12px;font-weight:600;
-  cursor:pointer;border-radius:11px;border:none;font-family:inherit;
-  transition:transform 0.12s,opacity 0.12s;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-}
+textarea{resize:none;height:62px;line-height:1.5;}
+.btn{width:100%;padding:9px 12px;font-size:12px;font-weight:600;cursor:pointer;border-radius:11px;border:none;font-family:inherit;transition:transform 0.12s,opacity 0.12s;display:flex;align-items:center;justify-content:center;gap:6px;}
 .btn:active{transform:scale(0.98);}
 .btn:disabled{opacity:0.55;cursor:not-allowed;}
 .btn-teal{background:linear-gradient(135deg,#0d9488,#2dd4bf);color:#fff;}
 .btn-teal:hover:not(:disabled){opacity:0.92;}
+.btn-amber{background:linear-gradient(135deg,#d97706,#fbbf24);color:#fff;}
+.btn-amber:hover:not(:disabled){opacity:0.92;}
 .msg-ok{font-size:11px;color:#059669;font-weight:500;}
 .msg-err{font-size:11px;color:#dc2626;font-weight:500;}
+.sec-label{font-size:11px;font-weight:600;color:#94a3b8;letter-spacing:0.4px;text-transform:uppercase;}
+.list-scroll{display:flex;flex-direction:column;gap:5px;max-height:150px;overflow-y:auto;}
 .hist-scroll{display:flex;flex-direction:column;gap:5px;max-height:160px;overflow-y:auto;}
 .card-stat{border-radius:12px;padding:10px 13px;display:flex;justify-content:space-between;align-items:center;}
 .card-red{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1px solid #fecaca;}
 .card-red .s-lbl{font-size:10px;font-weight:600;color:#b91c1c;letter-spacing:0.3px;}
 .card-red .s-amt{font-size:17px;font-weight:600;color:#dc2626;}
+.card-green{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;}
+.card-green .s-lbl{font-size:10px;font-weight:600;color:#15803d;letter-spacing:0.3px;}
+.card-green .s-amt{font-size:17px;font-weight:600;color:#16a34a;}
 .comp-box{background:rgba(255,255,255,0.6);border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;font-size:12px;}
 .comp-row{display:flex;justify-content:space-between;padding:3px 0;color:#64748b;}
 .comp-row strong{color:#1e293b;}
@@ -121,148 +82,456 @@ input:focus,select:focus,textarea:focus{border-color:#818cf8;box-shadow:0 0 0 3p
 .avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#a78bfa);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;}
 .ficha-name{font-size:13px;font-weight:600;color:#1e293b;}
 .ficha-code{font-size:11px;color:#94a3b8;}
-.hist-item{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:6px 10px;background:rgba(255,255,255,0.5);border-radius:8px;}
+.hist-item{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:6px 10px;background:rgba(255,255,255,0.6);border:1px solid #e2e8f0;border-radius:9px;}
+.hist-item .h-desc{font-size:10px;color:#94a3b8;margin-top:1px;}
+.hist-item .h-val{font-weight:600;color:#4f46e5;white-space:nowrap;}
+.pago-item{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:6px 10px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;border-radius:9px;}
+.pago-item .p-val{font-weight:600;color:#16a34a;}
+.pago-item .p-meta{font-size:10px;color:#6b7280;}
+.bar-wrap{height:6px;background:#e2e8f0;border-radius:4px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#6366f1,#2dd4bf);transition:width 0.4s;}
+.pct-row{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#94a3b8;}
+.empty{font-size:12px;color:#cbd5e1;text-align:center;padding:16px 0;}
+.field{display:flex;flex-direction:column;gap:3px;}
+.vuelto-hint{font-size:11px;font-weight:500;padding:6px 10px;border-radius:8px;}
+.vuelto-pos{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;}
+.vuelto-neg{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;}
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin 0.6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(15,23,42,0.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal{background:#fff;border-radius:24px;width:min(860px,96vw);max-height:90vh;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,0.18);overflow:hidden;}
+.modal-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid #e2e8f0;background:linear-gradient(135deg,#0d9488,#14b8a6);}
+.modal-header h2{font-size:15px;font-weight:600;color:#fff;display:flex;align-items:center;gap:8px;}
+.modal-close{background:rgba(255,255,255,0.2);border:none;color:#fff;width:30px;height:30px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.modal-close:hover{background:rgba(255,255,255,0.35);}
+.modal-body{display:grid;grid-template-columns:1fr 1fr;flex:1;overflow:hidden;}
+.catalogo-panel{border-right:1px solid #e2e8f0;display:flex;flex-direction:column;overflow:hidden;}
+.catalogo-header{padding:14px 16px 10px;border-bottom:1px solid #f1f5f9;}
+.catalogo-header h3{font-size:12px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px;}
+.search-input{width:100%;font-size:12px;font-family:inherit;border:1px solid #e2e8f0;border-radius:9px;padding:7px 11px;background:#f8fafc;color:#1e293b;outline:none;}
+.search-input:focus{border-color:#14b8a6;box-shadow:0 0 0 3px rgba(20,184,166,0.12);}
+.catalogo-list{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:7px;}
+.prod-card{display:flex;align-items:center;justify-content:space-between;background:#f8fafc;border:1px solid #e2e8f0;border-radius:11px;padding:9px 12px;gap:10px;}
+.prod-card:hover{border-color:#14b8a6;}
+.prod-info{flex:1;min-width:0;}
+.prod-nombre{font-size:12px;font-weight:500;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.prod-precio{font-size:11px;color:#64748b;margin-top:2px;}
+.prod-actions{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.qty-input{width:48px;font-size:12px;text-align:center;border:1px solid #e2e8f0;border-radius:7px;padding:4px 6px;font-family:inherit;outline:none;}
+.btn-add{background:linear-gradient(135deg,#0d9488,#14b8a6);color:#fff;border:none;border-radius:7px;padding:5px 10px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;}
+.btn-add:hover{opacity:0.88;}
+.btn-add.agotado{background:linear-gradient(135deg,#dc2626,#ef4444);cursor:not-allowed;}
+.stock-badge{display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;border-radius:6px;padding:2px 7px;white-space:nowrap;flex-shrink:0;}
+.stock-badge.ok{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0;}
+.stock-badge.warn{background:#fef3c7;color:#b45309;border:1px solid #fde68a;}
+.stock-badge.zero{background:#fee2e2;color:#b91c1c;border:1px solid #fecaca;}
+.carrito-panel{display:flex;flex-direction:column;overflow:hidden;}
+.carrito-header{padding:14px 16px 10px;border-bottom:1px solid #f1f5f9;}
+.carrito-header h3{font-size:12px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:0.4px;}
+.carrito-list{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:6px;}
+.cart-item{display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px;}
+.cart-item-info{flex:1;min-width:0;}
+.cart-item-nombre{font-size:12px;font-weight:500;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cart-item-sub{font-size:10px;color:#64748b;margin-top:1px;}
+.cart-item-total{font-size:12px;font-weight:600;color:#0d9488;white-space:nowrap;}
+.cart-item-del{background:none;border:none;color:#94a3b8;cursor:pointer;font-size:16px;line-height:1;padding:2px;}
+.cart-item-del:hover{color:#dc2626;}
+.cart-warn{font-size:11px;color:#d97706;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:6px;}
+.carrito-footer{padding:12px 16px;border-top:1px solid #e2e8f0;display:flex;flex-direction:column;gap:10px;}
+.total-row{display:flex;justify-content:space-between;align-items:center;}
+.total-lbl{font-size:12px;font-weight:600;color:#64748b;}
+.total-amt{font-size:20px;font-weight:600;color:#0d9488;}
+.btn-confirmar{background:linear-gradient(135deg,#0d9488,#14b8a6);color:#fff;border:none;border-radius:12px;padding:11px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity 0.15s,transform 0.12s;}
+.btn-confirmar:hover:not(:disabled){opacity:0.9;}
+.btn-confirmar:active{transform:scale(0.98);}
+.btn-confirmar:disabled{opacity:0.5;cursor:not-allowed;}
+.msg-modal{font-size:11px;min-height:14px;}
 </style>
 </head>
 <body>
-<div id="loginOverlay" class="login-overlay">
+
+<!-- LOGIN -->
+<div class="login-overlay" id="login-overlay">
   <div class="login-box">
-    <div class="login-logo"><i class="ti ti-building-warehouse"></i></div>
-    <div class="login-title" id="loginTitle">Iniciar Sesión</div>
-    <div class="login-sub" id="loginSub">Ingresa tus credenciales de acceso</div>
-    <div class="login-field"><label>USUARIO</label><input type="text" id="logUser" placeholder="ej: admin"/></div>
-    <div class="login-field"><label>CONTRASEÑA</label><input type="password" id="logPass" placeholder="••••••••"/></div>
-    <div id="loginErr" class="login-err"></div>
-    <button class="btn-login" id="btnLogin" onclick="ejecutarAuth()"><i class="ti ti-login"></i> <span id="btnAuthText">Ingresar al Sistema</span></button>
-    <div style="text-align:center; font-size:12px; color:#0d9488; cursor:pointer; font-weight:500;" id="toggleAuthMode" onclick="cambiarModoAuth()">¿No tienes cuenta? Regístrate aquí</div>
+    <div class="login-logo"><i class="ti ti-building-store"></i></div>
+    <div class="login-title">Bienvenido al ERP</div>
+    <div class="login-tabs">
+      <button class="login-tab active" onclick="switchTab('login')">Ingresar</button>
+      <button class="login-tab" onclick="switchTab('registro')">Crear cuenta</button>
+    </div>
+    <div class="tab-panel active" id="tab-login">
+      <div class="login-field"><label>Usuario</label><input type="text" id="inp-user" placeholder="ej. jose" autocomplete="username"/></div>
+      <div class="login-field"><label>Clave</label><input type="password" id="inp-clave" placeholder="••••" onkeydown="if(event.key==='Enter') hacerLogin()"/></div>
+      <div class="login-err" id="login-err"></div>
+      <button class="btn-login" id="btn-login" onclick="hacerLogin()"><i class="ti ti-login"></i> Ingresar</button>
+    </div>
+    <div class="tab-panel" id="tab-registro">
+      <div class="login-field"><label>Usuario</label><input type="text" id="reg-user" placeholder="ej. maria"/></div>
+      <div class="login-field"><label>Clave</label><input type="password" id="reg-clave" placeholder="••••"/></div>
+      <div class="login-field"><label>Repetir clave</label><input type="password" id="reg-clave2" placeholder="••••" onkeydown="if(event.key==='Enter') hacerRegistro()"/></div>
+      <div class="login-err" id="reg-err"></div>
+      <div class="login-ok" id="reg-ok"></div>
+      <button class="btn-registro" id="btn-registro" onclick="hacerRegistro()"><i class="ti ti-user-plus"></i> Crear cuenta</button>
+    </div>
   </div>
 </div>
 
-<header class="erp-header">
-  <h1>SISTEMA DE GESTIÓN ERP</h1><p>Panel de Administración y Control Operativo</p>
-  <div class="header-row"><div class="user-pill"><i class="ti ti-user"></i> <span id="sessionUser">Cargando...</span></div><button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button></div>
-</header>
+<!-- APP -->
+<div id="app" style="display:none">
+  <div class="erp-header">
+    <h1><i class="ti ti-building-store"></i> ERP · Mi cuenta</h1>
+    <p>Tus compras, pagos y movimientos</p>
+    <div class="header-row">
+      <button class="btn-carrito-top" onclick="abrirCarrito()">
+        <i class="ti ti-shopping-cart"></i> Nuevo pedido
+        <span id="badge-carrito" style="display:none;background:#fbbf24;color:#1e293b;border-radius:50%;width:18px;height:18px;font-size:10px;display:inline-flex;align-items:center;justify-content:center;margin-left:2px;">0</span>
+      </button>
+      <div class="user-pill"><i class="ti ti-user-circle"></i><span id="user-nombre"></span><button class="btn-logout" onclick="hacerLogout()">Salir</button></div>
+    </div>
+  </div>
 
-<div class="erp-grid">
-  <div class="panel panel-p1 t1">
-    <div class="panel-title"><i class="ti ti-users"></i> Ficha de Cliente</div>
-    <div class="ficha-hdr"><div class="avatar" id="clientAvatar">--</div><div><div class="ficha-name" id="clientName">Cargando...</div><div class="ficha-code" id="clientCode">Código: --</div></div></div>
-    <div class="card-stat card-red" style="margin-top: 8px;"><span class="s-lbl">DEUDA CONTABLE</span><span class="s-amt" id="clientDeuda">$0.00</span></div>
-  </div>
-  <div class="panel panel-p2 t2">
-    <div class="panel-title"><i class="ti ti-shopping-cart"></i> Generar Comprobante / Pedido</div>
-    <div><label>SELECCIONAR PRODUCTO</label><select id="prodSelect" onchange="actualizarPrecioUnitario()"></select></div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-      <div><label>PRECIO UNITARIO</label><input type="number" id="prodPrecio" readonly/></div>
-      <div><label>CANTIDAD</label><input type="number" id="prodCant" value="1" min="1" oninput="calcularTotalPedido()"/></div>
+  <div class="erp-grid">
+    <div class="panel panel-p1 t1">
+      <div class="panel-title"><i class="ti ti-id-badge"></i>Mi ficha</div>
+      <div id="ficha-contenido"><div class="empty">Cargando...</div></div>
     </div>
-    <div class="comp-box">
-      <div class="comp-row"><span>Importe Neto:</span><strong id="lblNeto">$0.00</strong></div>
-      <div class="comp-total"><span>TOTAL GENERAL:</span><span id="lblTotal">$0.00</span></div>
+    <div class="panel panel-p2 t2">
+      <div class="panel-title"><i class="ti ti-file-invoice"></i>Comprobante manual</div>
+      <div class="field"><label>Descripción</label><textarea id="inp-desc" placeholder="ej. Servicio de consultoría"></textarea></div>
+      <div class="field"><label>Importe ($)</label><input type="number" id="inp-valor" placeholder="0.00" min="0" step="0.01"/></div>
+      <button class="btn btn-teal" id="btn-emitir" onclick="generarComprobante()"><i class="ti ti-receipt"></i>Emitir comprobante</button>
+      <div id="msg-cp" style="min-height:14px"></div>
+      <div id="preview-comp"></div>
     </div>
-    <button class="btn btn-teal" onclick="enviarPedido()"><i class="ti ti-file-invoice"></i> Registrar Operación</button>
-    <div id="msgPedido"></div>
+    <div class="panel panel-p3 t3">
+      <div class="panel-title"><i class="ti ti-history"></i>Historial de comprobantes</div>
+      <div class="hist-scroll" id="hist-comprobantes"><div class="empty">Sin comprobantes</div></div>
+    </div>
+    <div class="panel panel-p4 t4">
+      <div class="panel-title"><i class="ti ti-cash"></i>Registrar pago</div>
+      <div id="cobro-info"></div>
+      <div class="field"><label>Monto a pagar ($)</label><input type="number" id="inp-pago" placeholder="0.00" min="0.01" step="0.01" oninput="calcVuelto()"/></div>
+      <div id="vuelto-info" style="min-height:14px"></div>
+      <button class="btn btn-amber" id="btn-cobro" onclick="registrarCobro()"><i class="ti ti-coins"></i>Confirmar pago</button>
+      <div id="msg-cobro" style="min-height:14px"></div>
+      <div class="sec-label" style="margin-top:4px">Últimos pagos</div>
+      <div class="hist-scroll" id="hist-pagos"><div class="empty">Sin pagos</div></div>
+    </div>
   </div>
-  <div class="panel panel-p3 t3"><div class="panel-title"><i class="ti ti-report-money"></i> Cuenta Corriente (Comprobantes)</div><div class="hist-scroll" id="listaComprobantes"></div></div>
-  <div class="panel panel-p4 t4"><div class="panel-title"><i class="ti ti-cash"></i> Historial de Pagos Recibidos</div><div class="hist-scroll" id="listaPagos"></div></div>
+</div>
+
+<!-- MODAL CARRITO -->
+<div class="modal-overlay" id="modal-overlay" onclick="clickOverlay(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2><i class="ti ti-shopping-cart"></i> Nuevo pedido</h2>
+      <button class="modal-close" onclick="cerrarCarrito()"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="catalogo-panel">
+        <div class="catalogo-header">
+          <h3><i class="ti ti-package"></i> Catálogo</h3>
+          <input class="search-input" id="search-prod" placeholder="Buscar producto..." oninput="filtrarProductos()"/>
+        </div>
+        <div class="catalogo-list" id="catalogo-list"><div class="empty">Cargando...</div></div>
+      </div>
+      <div class="carrito-panel">
+        <div class="carrito-header"><h3><i class="ti ti-receipt-2"></i> Carrito</h3></div>
+        <div class="carrito-list" id="carrito-list"><div class="empty">Agregá productos del catálogo</div></div>
+        <div class="carrito-footer">
+          <div id="cart-warns"></div>
+          <div class="total-row"><span class="total-lbl">Total del pedido</span><span class="total-amt" id="cart-total">$0.00</span></div>
+          <div id="msg-modal" class="msg-modal"></div>
+          <button class="btn-confirmar" id="btn-confirmar" onclick="confirmarPedido()"><i class="ti ti-check"></i> Confirmar pedido</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-const API_URL = "https://railway.app";
-let modoRegistro = false; let productosCache = [];
+var API = 'https://web-production-48fe2.up.railway.app';
+var sesion    = {usuario:null, cod_cliente:null};
+var clientes  = {};
+var productos = [];
+var carrito   = [];
+var numComp   = 1;
 
-window.addEventListener("DOMContentLoaded", () => { verificarSesionLocal(); cargarProductos(); });
+function fmt(n){
+  var parts = parseFloat(n).toFixed(2).split('.');
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return '$' + parts.join('.');
+}
+function ini(nombre){ return nombre.split(' ').map(function(p){return p[0]||'';}).join('').slice(0,2).toUpperCase(); }
 
-function verificarSesionLocal() {
-    const u = localStorage.getItem("erp_u"); const c = localStorage.getItem("erp_c");
-    if (u && c) {
-        document.getElementById("loginOverlay").style.display = "none";
-        document.getElementById("sessionUser").innerText = u.toUpperCase();
-        obtenerDatosClienteDirecto(c);
-    } else { document.getElementById("loginOverlay").style.display = "flex"; }
+async function api(url, method, body){
+  var opts = {method:method||'GET', headers:{'Content-Type':'application/json'}, credentials:'include'};
+  if(body) opts.body = JSON.stringify(body);
+  var r = await fetch(API + url, opts);
+  return r.json();
 }
 
-function cambiarModoAuth() {
-    modoRegistro = !modoRegistro;
-    document.getElementById("loginTitle").innerText = modoRegistro ? "Crear Nueva Cuenta" : "Iniciar Sesión";
-    document.getElementById("btnAuthText").innerText = modoRegistro ? "Registrarse" : "Ingresar";
-    document.getElementById("loginErr").innerText = "";
+function switchTab(tab){
+  document.getElementById('tab-login').classList.toggle('active', tab==='login');
+  document.getElementById('tab-registro').classList.toggle('active', tab==='registro');
+  document.querySelectorAll('.login-tab').forEach(function(t,i){
+    t.classList.toggle('active',(tab==='login'&&i===0)||(tab==='registro'&&i===1));
+  });
+  document.getElementById('login-err').textContent='';
+  document.getElementById('reg-err').textContent='';
+  document.getElementById('reg-ok').textContent='';
 }
 
-async function ejecutarAuth() {
-    const user = document.getElementById("logUser").value.trim();
-    const clave = document.getElementById("logPass").value.trim();
-    if(!user || !clave) return;
-    const ruta = modoRegistro ? "/api/registro" : "/api/login";
-    try {
-        const res = await fetch(`${API_URL}${ruta}`, {
-            method: "POST", headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ usuario: user, clave: clave })
-        });
-        const data = await res.json();
-        if (!res.ok) { document.getElementById("loginErr").innerText = data.error; return; }
-        if (modoRegistro) { alert(`Código: ${data.codigo}`); cambiarModoAuth(); } 
-        else {
-            localStorage.setItem("erp_u", data.usuario); localStorage.setItem("erp_c", data.cod_cliente);
-            verificarSesionLocal();
-        }
-    } catch { document.getElementById("loginErr").innerText = "Error de red."; }
+async function hacerLogin(){
+  var usuario = document.getElementById('inp-user').value.trim().toLowerCase();
+  var clave   = document.getElementById('inp-clave').value.trim();
+  var err     = document.getElementById('login-err');
+  var btn     = document.getElementById('btn-login');
+  if(!usuario||!clave){ err.textContent='Completá usuario y clave.'; return; }
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Ingresando...';
+  var res = await api('/api/login','POST',{usuario:usuario, clave:clave});
+  btn.disabled=false; btn.innerHTML='<i class="ti ti-login"></i> Ingresar';
+  if(res.error){ err.textContent=res.error; return; }
+  sesion.usuario=res.usuario; sesion.cod_cliente=res.cod_cliente;
+  document.getElementById('login-overlay').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('user-nombre').textContent=res.usuario;
+  await cargarTodo();
 }
 
-async function obtenerDatosClienteDirecto(codigo) {
-    try {
-        const res = await fetch(`${API_URL}/api/clientes`);
-        if (res.status === 401) {
-            document.getElementById("clientCode").innerText = `Código: ${codigo}`;
-            document.getElementById("clientName").innerText = localStorage.getItem("erp_u").toUpperCase();
-            document.getElementById("clientAvatar").innerText = codigo;
-            return;
-        }
-        const data = await res.json(); const cliente = data[codigo]; if (!cliente) return;
-        document.getElementById("clientCode").innerText = `Código: ${codigo}`;
-        document.getElementById("clientName").innerText = cliente.nombre;
-        document.getElementById("clientAvatar").innerText = cliente.nombre.substring(0,2).toUpperCase();
-        document.getElementById("clientDeuda").innerText = `$${cliente.deuda.toFixed(2)}`;
-    } catch (err) { console.error(err); }
+async function hacerLogout(){
+  await api('/api/logout','POST');
+  sesion={usuario:null,cod_cliente:null}; clientes={}; productos=[]; carrito=[];
+  document.getElementById('login-overlay').style.display='flex';
+  document.getElementById('app').style.display='none';
+  document.getElementById('inp-user').value='';
+  document.getElementById('inp-clave').value='';
+  document.getElementById('login-err').textContent='';
 }
 
-async function cargarProductos() {
-    try {
-        const res = await fetch(`${API_URL}/api/productos`); productosCache = await res.json();
-        const select = document.getElementById("prodSelect");
-        select.innerHTML = productosCache.map(p => `<option value="${p.codigo}">${p.nombre}</option>`).join('');
-        actualizarPrecioUnitario();
-    } catch {}
+async function hacerRegistro(){
+  var user  = document.getElementById('reg-user').value.trim().toLowerCase();
+  var clave = document.getElementById('reg-clave').value.trim();
+  var clave2= document.getElementById('reg-clave2').value.trim();
+  var err   = document.getElementById('reg-err');
+  var ok    = document.getElementById('reg-ok');
+  var btn   = document.getElementById('btn-registro');
+  err.textContent=''; ok.textContent='';
+  if(!user||!clave){ err.textContent='Completá usuario y clave.'; return; }
+  if(clave!==clave2){ err.textContent='Las claves no coinciden.'; return; }
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Creando...';
+  var res = await api('/api/registro','POST',{usuario:user, clave:clave});
+  btn.disabled=false; btn.innerHTML='<i class="ti ti-user-plus"></i> Crear cuenta';
+  if(res.error){ err.textContent=res.error; return; }
+  ok.textContent='✓ Cuenta creada. Tu código es #'+res.codigo+'. Ya podés ingresar.';
+  document.getElementById('reg-user').value='';
+  document.getElementById('reg-clave').value='';
+  document.getElementById('reg-clave2').value='';
+  setTimeout(function(){ switchTab('login'); }, 2500);
 }
 
-function actualizarPrecioUnitario() {
-    const prod = productosCache.find(p => p.codigo === document.getElementById("prodSelect").value);
-    if(prod) { document.getElementById("prodPrecio").value = prod.precio; calcularTotalPedido(); }
+async function cargarTodo(){ await cargarClientes(); await cargarProductos(); }
+
+async function cargarClientes(){
+  try{
+    var data = await api('/api/clientes');
+    if(data.error) return;
+    clientes=data;
+    var maxNum=0;
+    Object.values(clientes).forEach(function(c){
+      c.movimientos.forEach(function(m){
+        var n=parseInt((m.nro||'').replace('CP-',''));
+        if(!isNaN(n)&&n>maxNum) maxNum=n;
+      });
+    });
+    numComp=maxNum+1;
+    renderFicha(); renderHistComprobantes(); renderHistPagos(); actualizarPanelCobro();
+  } catch(e){ console.error(e); }
 }
 
-function calcularTotalPedido() {
-    const t = (parseFloat(document.getElementById("prodPrecio").value)||0) * (parseInt(document.getElementById("prodCant").value)||0);
-    document.getElementById("lblNeto").innerText = `$${t.toFixed(2)}`; document.getElementById("lblTotal").innerText = `$${t.toFixed(2)}`;
+async function cargarProductos(){
+  try{
+    var data=await api('/api/productos');
+    if(!data.error) productos=data;
+    renderCatalogo();
+  } catch(e){ console.error(e); }
 }
 
-async function enviarPedido() {
-    const prod = productosCache.find(p => p.codigo === document.getElementById("prodSelect").value);
-    const cant = parseInt(document.getElementById("prodCant").value) || 0;
-    if(!prod || cant <= 0) return;
-    const payload = {
-        codigo_cliente: localStorage.getItem("erp_c"),
-        nro: "FAC-" + Math.floor(Math.random() * 900000),
-        items: [{ codigo: prod.codigo, nombre: prod.nombre, precio: prod.precio, cantidad: cant }]
-    };
-    try {
-        const res = await fetch(`${API_URL}/api/pedido`, {
-            method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
-        });
-        if(res.ok) { alert("¡Sincronizado!"); obtenerDatosClienteDirecto(localStorage.getItem("erp_c")); }
-    } catch {}
+function renderFicha(){
+  var cod=sesion.cod_cliente;
+  var cont=document.getElementById('ficha-contenido');
+  if(!cod||!clientes[cod]){ cont.innerHTML='<div class="empty">Sin datos</div>'; return; }
+  var c=clientes[cod];
+  var totalPagado=c.pagos.reduce(function(a,p){return a+p.val;},0);
+  var totalFact=c.movimientos.reduce(function(a,m){return a+m.val;},0);
+  var pct=totalFact>0?Math.min(100,Math.round(totalPagado/totalFact*100)):0;
+  cont.innerHTML=
+    '<div class="ficha-hdr"><div class="avatar">'+ini(c.nombre)+'</div>'+
+    '<div><div class="ficha-name">'+c.nombre+'</div><div class="ficha-code">Cliente #'+cod+'</div></div></div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">'+
+    '<div class="card-stat card-red"><div class="s-lbl">DEUDA PENDIENTE</div><div class="s-amt">'+fmt(c.deuda)+'</div></div>'+
+    '<div class="card-stat card-green"><div class="s-lbl">TOTAL PAGADO</div><div class="s-amt">'+fmt(totalPagado)+'</div></div>'+
+    '</div>'+
+    '<div class="pct-row"><span>Cancelación</span><span>'+pct+'%</span></div>'+
+    '<div class="bar-wrap"><div class="bar-fill" style="width:'+pct+'%"></div></div>';
 }
 
-function cerrarSesion() { localStorage.clear(); location.reload(); }
+function renderHistComprobantes(){
+  var cod=sesion.cod_cliente;
+  var cont=document.getElementById('hist-comprobantes');
+  if(!cod||!clientes[cod]||!clientes[cod].movimientos.length){ cont.innerHTML='<div class="empty">Sin comprobantes</div>'; return; }
+  cont.innerHTML=clientes[cod].movimientos.slice().reverse().map(function(m){
+    return '<div class="hist-item"><div><strong>'+m.nro+'</strong> — '+m.desc+'<div class="h-desc">'+m.fecha+'</div></div><span class="h-val">'+fmt(m.val)+'</span></div>';
+  }).join('');
+}
+
+function renderHistPagos(){
+  var cod=sesion.cod_cliente;
+  var cont=document.getElementById('hist-pagos');
+  if(!cod||!clientes[cod]||!clientes[cod].pagos.length){ cont.innerHTML='<div class="empty">Sin pagos</div>'; return; }
+  cont.innerHTML=clientes[cod].pagos.slice().reverse().map(function(p){
+    return '<div class="pago-item"><div><strong>Pago realizado</strong><div class="p-meta">'+p.fecha+'</div></div><span class="p-val">'+fmt(p.val)+'</span></div>';
+  }).join('');
+}
+
+async function generarComprobante(){
+  var desc=document.getElementById('inp-desc').value.trim();
+  var val=parseFloat(document.getElementById('inp-valor').value);
+  var msg=document.getElementById('msg-cp');
+  var btn=document.getElementById('btn-emitir');
+  if(!desc){ msg.innerHTML='<span class="msg-err">Ingresá una descripción.</span>'; return; }
+  if(isNaN(val)||val<=0){ msg.innerHTML='<span class="msg-err">Importe inválido.</span>'; return; }
+  var nro='CP-'+String(numComp++).padStart(4,'0');
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Guardando...';
+  var res=await api('/api/pedido','POST',{nro:nro,items:[{codigo:'MANUAL',nombre:desc,cantidad:1,precio:val}]});
+  btn.disabled=false; btn.innerHTML='<i class="ti ti-receipt"></i>Emitir comprobante';
+  if(res.error){ numComp--; msg.innerHTML='<span class="msg-err">'+res.error+'</span>'; return; }
+  msg.innerHTML='<span class="msg-ok">✓ '+nro+' emitido.</span>';
+  setTimeout(function(){msg.innerHTML='';},3000);
+  document.getElementById('preview-comp').innerHTML=
+    '<div class="comp-box"><div class="comp-row"><span>Nro.</span><strong>'+nro+'</strong></div>'+
+    '<div class="comp-row"><span>Fecha</span><strong>'+res.fecha+'</strong></div>'+
+    '<div class="comp-row"><span>Concepto</span><strong>'+desc+'</strong></div>'+
+    '<div class="comp-total"><span>Total</span><span>'+fmt(val)+'</span></div></div>';
+  document.getElementById('inp-desc').value='';
+  document.getElementById('inp-valor').value='';
+  await cargarClientes();
+}
+
+function actualizarPanelCobro(){
+  var cod=sesion.cod_cliente;
+  var cont=document.getElementById('cobro-info');
+  document.getElementById('inp-pago').value='';
+  document.getElementById('vuelto-info').innerHTML='';
+  if(!cod||!clientes[cod]){ cont.innerHTML=''; return; }
+  var c=clientes[cod];
+  cont.innerHTML=c.deuda<=0
+    ?'<div class="card-stat card-green"><div class="s-lbl">SIN DEUDA</div><div class="s-amt">'+fmt(0)+'</div></div>'
+    :'<div class="card-stat card-red"><div class="s-lbl">DEUDA PENDIENTE</div><div class="s-amt">'+fmt(c.deuda)+'</div></div>';
+}
+
+function calcVuelto(){
+  var cod=sesion.cod_cliente;
+  var pago=parseFloat(document.getElementById('inp-pago').value);
+  var cont=document.getElementById('vuelto-info');
+  if(!cod||!clientes[cod]||isNaN(pago)||pago<=0){ cont.innerHTML=''; return; }
+  var deuda=clientes[cod].deuda;
+  var vuelto=pago-deuda;
+  if(vuelto>0){ cont.innerHTML='<div class="vuelto-hint vuelto-pos"><i class="ti ti-check"></i> Cancela deuda completa · Vuelto: '+fmt(vuelto)+'</div>'; }
+  else if(vuelto===0){ cont.innerHTML='<div class="vuelto-hint vuelto-pos"><i class="ti ti-check"></i> Cancela exacto. Sin vuelto.</div>'; }
+  else { cont.innerHTML='<div class="vuelto-hint vuelto-neg"><i class="ti ti-info-circle"></i> Cancela '+fmt(pago)+' · Resta: '+fmt(Math.abs(vuelto))+'</div>'; }
+}
+
+async function registrarCobro(){
+  var pago=parseFloat(document.getElementById('inp-pago').value);
+  var msg=document.getElementById('msg-cobro');
+  var btn=document.getElementById('btn-cobro');
+  if(isNaN(pago)||pago<=0){ msg.innerHTML='<span class="msg-err">Ingresá un monto válido.</span>'; return; }
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Guardando...';
+  var res=await api('/api/pagos','POST',{monto:pago});
+  btn.disabled=false; btn.innerHTML='<i class="ti ti-coins"></i>Confirmar pago';
+  if(res.error){ msg.innerHTML='<span class="msg-err">'+res.error+'</span>'; return; }
+  msg.innerHTML='<span class="msg-ok">✓ Pago de '+fmt(res.aplicado)+' registrado.</span>';
+  setTimeout(function(){msg.innerHTML='';},3000);
+  document.getElementById('inp-pago').value='';
+  document.getElementById('vuelto-info').innerHTML='';
+  await cargarClientes();
+}
+
+function abrirCarrito(){ document.getElementById('modal-overlay').classList.add('open'); document.getElementById('search-prod').value=''; renderCatalogo(); renderCarrito(); }
+function cerrarCarrito(){ document.getElementById('modal-overlay').classList.remove('open'); }
+function clickOverlay(e){ if(e.target===document.getElementById('modal-overlay')) cerrarCarrito(); }
+function filtrarProductos(){ renderCatalogo(document.getElementById('search-prod').value.toLowerCase()); }
+
+function renderCatalogo(filtro){
+  var cont=document.getElementById('catalogo-list');
+  var lista=filtro?productos.filter(function(p){ return p.nombre.toLowerCase().includes(filtro)||p.codigo.toLowerCase().includes(filtro); }):productos;
+  if(!lista.length){ cont.innerHTML='<div class="empty">Sin productos en el catálogo.</div>'; return; }
+  cont.innerHTML=lista.map(function(p){
+    var sinStock=p.stock===0;
+    var bc=p.stock>5?'ok':p.stock>0?'warn':'zero';
+    var bi=p.stock>5?'ti-circle-check':p.stock>0?'ti-alert-triangle':'ti-ban';
+    var bt=p.stock>0?p.stock+' uds.':'Sin stock';
+    var btnC=sinStock?'btn-add agotado':'btn-add';
+    var btnL=sinStock?'<i class="ti ti-ban"></i> Sin stock':'<i class="ti ti-plus"></i> Agregar';
+    return '<div class="prod-card"><div class="prod-info"><div class="prod-nombre">'+p.nombre+'</div><div class="prod-precio">'+fmt(p.precio)+'</div></div>'+
+      '<div class="prod-actions"><span class="stock-badge '+bc+'"><i class="ti '+bi+'"></i> '+bt+'</span>'+
+      '<input class="qty-input" type="number" id="qty-'+p.codigo+'" value="1" min="1" '+(sinStock?'disabled':'')+' style="'+(sinStock?'opacity:0.4':'')+'"/>'+
+      '<button class="'+btnC+'" onclick="agregarAlCarrito(\''+p.codigo+'\')" '+(sinStock?'disabled':'')+'>'+btnL+'</button></div></div>';
+  }).join('');
+}
+
+function agregarAlCarrito(codigo){
+  var prod=productos.find(function(p){ return p.codigo===codigo; });
+  if(!prod) return;
+  var qty=parseInt(document.getElementById('qty-'+codigo).value)||1;
+  var idx=carrito.findIndex(function(i){ return i.codigo===codigo; });
+  if(idx>=0){ carrito[idx].cantidad+=qty; } else { carrito.push({codigo:prod.codigo,nombre:prod.nombre,cantidad:qty,precio:prod.precio,stock:prod.stock}); }
+  renderCarrito(); actualizarBadge();
+}
+
+function quitarDelCarrito(codigo){ carrito=carrito.filter(function(i){ return i.codigo!==codigo; }); renderCarrito(); actualizarBadge(); }
+
+function renderCarrito(){
+  var cont=document.getElementById('carrito-list');
+  var warns=document.getElementById('cart-warns');
+  var total=0; warns.innerHTML='';
+  if(!carrito.length){ cont.innerHTML='<div class="empty">Agregá productos del catálogo</div>'; document.getElementById('cart-total').textContent='$0.00'; return; }
+  var warnsArr=[];
+  cont.innerHTML=carrito.map(function(item){
+    var sub=item.cantidad*item.precio; total+=sub;
+    if(item.cantidad>item.stock&&item.stock>=0) warnsArr.push(item.nombre+': pedís '+item.cantidad+', hay '+item.stock);
+    return '<div class="cart-item"><div class="cart-item-info"><div class="cart-item-nombre">'+item.nombre+'</div><div class="cart-item-sub">'+item.cantidad+' × '+fmt(item.precio)+'</div></div><span class="cart-item-total">'+fmt(sub)+'</span><button class="cart-item-del" onclick="quitarDelCarrito(\''+item.codigo+'\')"><i class="ti ti-x"></i></button></div>';
+  }).join('');
+  document.getElementById('cart-total').textContent=fmt(total);
+  if(warnsArr.length) warns.innerHTML=warnsArr.map(function(w){ return '<div class="cart-warn"><i class="ti ti-alert-triangle"></i> '+w+'</div>'; }).join('');
+}
+
+function actualizarBadge(){
+  var badge=document.getElementById('badge-carrito');
+  var total=carrito.reduce(function(a,i){return a+i.cantidad;},0);
+  if(total>0){ badge.style.display='inline-flex'; badge.textContent=total; } else { badge.style.display='none'; }
+}
+
+async function confirmarPedido(){
+  var msg=document.getElementById('msg-modal');
+  var btn=document.getElementById('btn-confirmar');
+  if(!carrito.length){ msg.innerHTML='<span class="msg-err">El carrito está vacío.</span>'; return; }
+  var nro='CP-'+String(numComp++).padStart(4,'0');
+  btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Procesando...';
+  var res=await api('/api/pedido','POST',{nro:nro,items:carrito.map(function(i){ return {codigo:i.codigo,nombre:i.nombre,cantidad:i.cantidad,precio:i.precio}; })});
+  btn.disabled=false; btn.innerHTML='<i class="ti ti-check"></i> Confirmar pedido';
+  if(res.error){ numComp--; msg.innerHTML='<span class="msg-err">'+res.error+'</span>'; return; }
+  msg.innerHTML='<span class="msg-ok">✓ Pedido '+nro+' — '+fmt(res.total)+'</span>';
+  carrito=[]; actualizarBadge(); renderCarrito();
+  await cargarClientes(); await cargarProductos();
+  setTimeout(function(){ msg.innerHTML=''; cerrarCarrito(); }, 2000);
+}
+
+setInterval(async function(){
+  if(sesion.usuario){ await cargarClientes(); await cargarProductos(); }
+}, 10000);
 </script>
 </body>
 </html>
