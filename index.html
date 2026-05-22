@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>ERP · Gestión de Clientes</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css"/>
+<link rel="stylesheet" href="https://jsdelivr.net"/>
 <style>
 @import url('https://googleapis.com');
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -14,8 +14,6 @@ body{
   background:linear-gradient(135deg,#0d9488 0%,#14b8a6 50%,#5eead4 100%);
   padding:24px;
 }
-
-/* ── LOGIN MODAL ── */
 .login-overlay{
   position:fixed;inset:0;z-index:200;
   background:linear-gradient(135deg,#0d9488,#0f766e);
@@ -23,25 +21,13 @@ body{
 }
 .login-box{
   background:#fff;border-radius:24px;
-  width:min(380px,92vw);
-  padding:36px 32px;
+  width:min(380px,92vw);padding:36px 32px;
   box-shadow:0 24px 60px rgba(0,0,0,0.18);
   display:flex;flex-direction:column;gap:18px;
 }
-.login-logo{
-  text-align:center;
-  font-size:32px;color:#0d9488;
-  margin-bottom:4px;
-}
-.login-title{
-  text-align:center;
-  font-size:18px;font-weight:600;color:#1e293b;
-}
-.login-sub{
-  text-align:center;
-  font-size:12px;color:#94a3b8;
-  margin-top:-10px;
-}
+.login-logo{text-align:center;font-size:32px;color:#0d9488;margin-bottom:4px;}
+.login-title{text-align:center;font-size:18px;font-weight:600;color:#1e293b;}
+.login-sub{text-align:center;font-size:12px;color:#94a3b8;margin-top:-10px;}
 .login-field{display:flex;flex-direction:column;gap:4px;}
 .login-field label{font-size:11px;font-weight:500;color:#64748b;}
 .login-field input{
@@ -61,8 +47,6 @@ body{
 .btn-login:hover{opacity:0.9;}
 .btn-login:active{transform:scale(0.98);}
 .login-err{font-size:12px;color:#dc2626;text-align:center;min-height:16px;font-weight:500;}
-
-/* ── HEADER ── */
 .erp-header{text-align:center;margin-bottom:22px;}
 .erp-header h1{
   font-size:20px;font-weight:600;
@@ -72,22 +56,10 @@ body{
 }
 .erp-header p{font-size:12px;color:rgba(255,255,255,0.7);margin-top:4px;}
 .header-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap;}
-.btn-carrito-top{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,0.15);
-  border:1px solid rgba(255,255,255,0.35);
-  color:#fff;font-size:13px;font-weight:600;
-  padding:9px 20px;border-radius:50px;cursor:pointer;
-  backdrop-filter:blur(8px);transition:background 0.2s;font-family:inherit;
-}
-.btn-carrito-top:hover{background:rgba(255,255,255,0.25);}
-.btn-carrito-top i{font-size:18px;}
 .user-pill{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,0.15);
-  border:1px solid rgba(255,255,255,0.35);
-  color:#fff;font-size:12px;font-weight:500;
-  padding:7px 14px;border-radius:50px;
+  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.35);
+  color:#fff;font-size:12px;font-weight:500;padding:7px 14px;border-radius:50px;
   backdrop-filter:blur(8px);
 }
 .btn-logout{
@@ -96,18 +68,11 @@ body{
   cursor:pointer;font-family:inherit;transition:background 0.15s;
 }
 .btn-logout:hover{background:rgba(255,255,255,0.35);}
-
-/* ── GRID ── */
-.erp-grid{
-  display:grid;grid-template-columns:repeat(2,1fr);
-  gap:18px;max-width:1100px;margin:0 auto;
-}
+.erp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1100px;margin:0 auto;}
 @media(max-width:768px){ .erp-grid{grid-template-columns:1fr;} }
 .panel{
-  background:rgba(255,255,255,0.82);
-  border:1px solid rgba(255,255,255,0.9);
-  border-radius:20px;padding:20px;
-  display:flex;flex-direction:column;gap:11px;
+  background:rgba(255,255,255,0.82);border:1px solid rgba(255,255,255,0.9);
+  border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:11px;
   box-shadow:0 2px 24px rgba(0,0,0,0.08),0 1px 4px rgba(0,0,0,0.04);
 }
 .panel-p1{background:linear-gradient(145deg,rgba(238,242,255,0.97),rgba(255,255,255,0.93));}
@@ -131,7 +96,6 @@ input,select,textarea{
   outline:none;transition:border 0.15s,box-shadow 0.15s;
 }
 input:focus,select:focus,textarea:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(129,140,248,0.15);}
-textarea{resize:none;height:62px;line-height:1.5;}
 .btn{
   width:100%;padding:9px 12px;font-size:12px;font-weight:600;
   cursor:pointer;border-radius:11px;border:none;font-family:inherit;
@@ -140,27 +104,15 @@ textarea{resize:none;height:62px;line-height:1.5;}
 }
 .btn:active{transform:scale(0.98);}
 .btn:disabled{opacity:0.55;cursor:not-allowed;}
-.btn-indigo{background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;}
-.btn-indigo:hover:not(:disabled){opacity:0.92;}
 .btn-teal{background:linear-gradient(135deg,#0d9488,#2dd4bf);color:#fff;}
 .btn-teal:hover:not(:disabled){opacity:0.92;}
-.btn-amber{background:linear-gradient(135deg,#d97706,#fbbf24);color:#fff;}
-.btn-amber:hover:not(:disabled){opacity:0.92;}
-.btn-sm{padding:5px 10px;font-size:11px;border-radius:8px;width:auto;}
 .msg-ok{font-size:11px;color:#059669;font-weight:500;}
 .msg-err{font-size:11px;color:#dc2626;font-weight:500;}
-.sec-label{font-size:11px;font-weight:600;color:#94a3b8;letter-spacing:0.4px;text-transform:uppercase;}
-.chip{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.7);border:1px solid #e2e8f0;border-radius:10px;padding:7px 11px;font-size:12px;}
-.chip-name{font-weight:500;color:#1e293b;}
-.list-scroll{display:flex;flex-direction:column;gap:5px;max-height:150px;overflow-y:auto;}
 .hist-scroll{display:flex;flex-direction:column;gap:5px;max-height:160px;overflow-y:auto;}
 .card-stat{border-radius:12px;padding:10px 13px;display:flex;justify-content:space-between;align-items:center;}
 .card-red{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1px solid #fecaca;}
 .card-red .s-lbl{font-size:10px;font-weight:600;color:#b91c1c;letter-spacing:0.3px;}
 .card-red .s-amt{font-size:17px;font-weight:600;color:#dc2626;}
-.card-green{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #bbf7d0;}
-.card-green .s-lbl{font-size:10px;font-weight:600;color:#15803d;letter-spacing:0.3px;}
-.card-green .s-amt{font-size:17px;font-weight:600;color:#16a34a;}
 .comp-box{background:rgba(255,255,255,0.6);border:1px solid #e2e8f0;border-radius:12px;padding:10px 12px;font-size:12px;}
 .comp-row{display:flex;justify-content:space-between;padding:3px 0;color:#64748b;}
 .comp-row strong{color:#1e293b;}
@@ -173,49 +125,144 @@ textarea{resize:none;height:62px;line-height:1.5;}
 </style>
 </head>
 <body>
-
-<!-- MODAL DE AUTENTICACIÓN -->
 <div id="loginOverlay" class="login-overlay">
   <div class="login-box">
     <div class="login-logo"><i class="ti ti-building-warehouse"></i></div>
     <div class="login-title" id="loginTitle">Iniciar Sesión</div>
     <div class="login-sub" id="loginSub">Ingresa tus credenciales de acceso</div>
-    
-    <div class="login-field">
-      <label>USUARIO</label>
-      <input type="text" id="logUser" placeholder="ej: admin"/>
-    </div>
-    <div class="login-field">
-      <label>CONTRASEÑA</label>
-      <input type="password" id="logPass" placeholder="••••••••"/>
-    </div>
-    
+    <div class="login-field"><label>USUARIO</label><input type="text" id="logUser" placeholder="ej: admin"/></div>
+    <div class="login-field"><label>CONTRASEÑA</label><input type="password" id="logPass" placeholder="••••••••"/></div>
     <div id="loginErr" class="login-err"></div>
-    
-    <button class="btn-login" id="btnLogin" onclick="ejecutarAuth()">
-      <i class="ti ti-login"></i> <span id="btnAuthText">Ingresar al Sistema</span>
-    </button>
-    
-    <div style="text-align:center; font-size:12px; color:#0d9488; cursor:pointer; font-weight:500;" id="toggleAuthMode" onclick="cambiarModoAuth()">
-      ¿No tienes cuenta? Regístrate aquí
-    </div>
+    <button class="btn-login" id="btnLogin" onclick="ejecutarAuth()"><i class="ti ti-login"></i> <span id="btnAuthText">Ingresar al Sistema</span></button>
+    <div style="text-align:center; font-size:12px; color:#0d9488; cursor:pointer; font-weight:500;" id="toggleAuthMode" onclick="cambiarModoAuth()">¿No tienes cuenta? Regístrate aquí</div>
   </div>
 </div>
 
-<!-- CONTENIDO PRINCIPAL -->
 <header class="erp-header">
-  <h1>SISTEMA DE GESTIÓN ERP</h1>
-  <p>Panel de Administración y Control Operativo</p>
-  <div class="header-row">
-    <div class="user-pill">
-      <i class="ti ti-user"></i> <span id="sessionUser">Cargando...</span>
-    </div>
-    <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
-  </div>
+  <h1>SISTEMA DE GESTIÓN ERP</h1><p>Panel de Administración y Control Operativo</p>
+  <div class="header-row"><div class="user-pill"><i class="ti ti-user"></i> <span id="sessionUser">Cargando...</span></div><button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button></div>
 </header>
 
 <div class="erp-grid">
-  <!-- PANEL 1: CLIENTES -->
   <div class="panel panel-p1 t1">
     <div class="panel-title"><i class="ti ti-users"></i> Ficha de Cliente</div>
-    <div class="ficha-hdr">
+    <div class="ficha-hdr"><div class="avatar" id="clientAvatar">--</div><div><div class="ficha-name" id="clientName">Cargando...</div><div class="ficha-code" id="clientCode">Código: --</div></div></div>
+    <div class="card-stat card-red" style="margin-top: 8px;"><span class="s-lbl">DEUDA CONTABLE</span><span class="s-amt" id="clientDeuda">$0.00</span></div>
+  </div>
+  <div class="panel panel-p2 t2">
+    <div class="panel-title"><i class="ti ti-shopping-cart"></i> Generar Comprobante / Pedido</div>
+    <div><label>SELECCIONAR PRODUCTO</label><select id="prodSelect" onchange="actualizarPrecioUnitario()"></select></div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+      <div><label>PRECIO UNITARIO</label><input type="number" id="prodPrecio" readonly/></div>
+      <div><label>CANTIDAD</label><input type="number" id="prodCant" value="1" min="1" oninput="calcularTotalPedido()"/></div>
+    </div>
+    <div class="comp-box">
+      <div class="comp-row"><span>Importe Neto:</span><strong id="lblNeto">$0.00</strong></div>
+      <div class="comp-total"><span>TOTAL GENERAL:</span><span id="lblTotal">$0.00</span></div>
+    </div>
+    <button class="btn btn-teal" onclick="enviarPedido()"><i class="ti ti-file-invoice"></i> Registrar Operación</button>
+    <div id="msgPedido"></div>
+  </div>
+  <div class="panel panel-p3 t3"><div class="panel-title"><i class="ti ti-report-money"></i> Cuenta Corriente (Comprobantes)</div><div class="hist-scroll" id="listaComprobantes"></div></div>
+  <div class="panel panel-p4 t4"><div class="panel-title"><i class="ti ti-cash"></i> Historial de Pagos Recibidos</div><div class="hist-scroll" id="listaPagos"></div></div>
+</div>
+
+<script>
+const API_URL = "https://railway.app";
+let modoRegistro = false; let productosCache = [];
+
+window.addEventListener("DOMContentLoaded", () => { verificarSesionLocal(); cargarProductos(); });
+
+function verificarSesionLocal() {
+    const u = localStorage.getItem("erp_u"); const c = localStorage.getItem("erp_c");
+    if (u && c) {
+        document.getElementById("loginOverlay").style.display = "none";
+        document.getElementById("sessionUser").innerText = u.toUpperCase();
+        obtenerDatosClienteDirecto(c);
+    } else { document.getElementById("loginOverlay").style.display = "flex"; }
+}
+
+function cambiarModoAuth() {
+    modoRegistro = !modoRegistro;
+    document.getElementById("loginTitle").innerText = modoRegistro ? "Crear Nueva Cuenta" : "Iniciar Sesión";
+    document.getElementById("btnAuthText").innerText = modoRegistro ? "Registrarse" : "Ingresar";
+    document.getElementById("loginErr").innerText = "";
+}
+
+async function ejecutarAuth() {
+    const user = document.getElementById("logUser").value.trim();
+    const clave = document.getElementById("logPass").value.trim();
+    if(!user || !clave) return;
+    const ruta = modoRegistro ? "/api/registro" : "/api/login";
+    try {
+        const res = await fetch(`${API_URL}${ruta}`, {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ usuario: user, clave: clave })
+        });
+        const data = await res.json();
+        if (!res.ok) { document.getElementById("loginErr").innerText = data.error; return; }
+        if (modoRegistro) { alert(`Código: ${data.codigo}`); cambiarModoAuth(); } 
+        else {
+            localStorage.setItem("erp_u", data.usuario); localStorage.setItem("erp_c", data.cod_cliente);
+            verificarSesionLocal();
+        }
+    } catch { document.getElementById("loginErr").innerText = "Error de red."; }
+}
+
+async function obtenerDatosClienteDirecto(codigo) {
+    try {
+        const res = await fetch(`${API_URL}/api/clientes`);
+        if (res.status === 401) {
+            document.getElementById("clientCode").innerText = `Código: ${codigo}`;
+            document.getElementById("clientName").innerText = localStorage.getItem("erp_u").toUpperCase();
+            document.getElementById("clientAvatar").innerText = codigo;
+            return;
+        }
+        const data = await res.json(); const cliente = data[codigo]; if (!cliente) return;
+        document.getElementById("clientCode").innerText = `Código: ${codigo}`;
+        document.getElementById("clientName").innerText = cliente.nombre;
+        document.getElementById("clientAvatar").innerText = cliente.nombre.substring(0,2).toUpperCase();
+        document.getElementById("clientDeuda").innerText = `$${cliente.deuda.toFixed(2)}`;
+    } catch (err) { console.error(err); }
+}
+
+async function cargarProductos() {
+    try {
+        const res = await fetch(`${API_URL}/api/productos`); productosCache = await res.json();
+        const select = document.getElementById("prodSelect");
+        select.innerHTML = productosCache.map(p => `<option value="${p.codigo}">${p.nombre}</option>`).join('');
+        actualizarPrecioUnitario();
+    } catch {}
+}
+
+function actualizarPrecioUnitario() {
+    const prod = productosCache.find(p => p.codigo === document.getElementById("prodSelect").value);
+    if(prod) { document.getElementById("prodPrecio").value = prod.precio; calcularTotalPedido(); }
+}
+
+function calcularTotalPedido() {
+    const t = (parseFloat(document.getElementById("prodPrecio").value)||0) * (parseInt(document.getElementById("prodCant").value)||0);
+    document.getElementById("lblNeto").innerText = `$${t.toFixed(2)}`; document.getElementById("lblTotal").innerText = `$${t.toFixed(2)}`;
+}
+
+async function enviarPedido() {
+    const prod = productosCache.find(p => p.codigo === document.getElementById("prodSelect").value);
+    const cant = parseInt(document.getElementById("prodCant").value) || 0;
+    if(!prod || cant <= 0) return;
+    const payload = {
+        codigo_cliente: localStorage.getItem("erp_c"),
+        nro: "FAC-" + Math.floor(Math.random() * 900000),
+        items: [{ codigo: prod.codigo, nombre: prod.nombre, precio: prod.precio, cantidad: cant }]
+    };
+    try {
+        const res = await fetch(`${API_URL}/api/pedido`, {
+            method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
+        });
+        if(res.ok) { alert("¡Sincronizado!"); obtenerDatosClienteDirecto(localStorage.getItem("erp_c")); }
+    } catch {}
+}
+
+function cerrarSesion() { localStorage.clear(); location.reload(); }
+</script>
+</body>
+</html>
